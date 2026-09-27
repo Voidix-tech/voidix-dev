@@ -289,11 +289,12 @@ Usage note: each row below holds one sentence, one short label, or one list item
 | Sign off sentence 2 | Built with its own gravity. |  | Websites, apps, business systems, and practical AI, designed and built with care. | CMS |
 | Studio link | About |  | About Voidix | `/about` |
 | Studio link | Careers |  | Careers | `/careers` |
-| Direct link | hello@voidix.studio |  | Keep temporarily; confirm the public email and domain before launch. | `mailto:hello@voidix.studio` |
-| Elsewhere link | X |  | Keep temporarily; verify the account before launch. | `https://x.com/voidixstudio` |
-| Elsewhere link | LinkedIn |  | Keep temporarily; verify the account before launch. | `https://linkedin.com/company/voidixstudio` |
-| Elsewhere link | GitHub |  | Keep temporarily; verify the account before launch. | `https://github.com/voidixstudio` |
-| Elsewhere link | Dribbble |  | Keep temporarily; verify the account before launch. | `https://dribbble.com/voidixstudio` |
+| Direct link | info@voidix.tech |  | Verified public inbox. | `mailto:info@voidix.tech` |
+| Direct link | Call +1 (307) 317-9422 |  | Verified public telephone; opens a call. | `tel:+13073179422` |
+| Direct link | Text |  | Opens a new SMS to the public telephone. | `sms:+13073179422` |
+| Elsewhere link | X |  | Verified studio profile. | `https://x.com/Voidix_tech` |
+| Elsewhere link | LinkedIn |  | Verified studio profile. | `https://www.linkedin.com/company/voidix-tech` |
+| Elsewhere link | GitHub |  | Verified studio profile. | `https://github.com/Voidix-tech` |
 | Legal link | Privacy |  | Privacy | `/privacy` |
 | Legal link | Terms |  | Terms | `/terms` |
 

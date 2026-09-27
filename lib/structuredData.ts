@@ -22,14 +22,14 @@
  */
 
 import type { FaqEntry } from '@/components/sections/Chamber/faqEntries';
-import { SITE_NAME, SITE_URL } from '@/lib/siteMetadata';
+import {
+  PUBLIC_EMAIL_ADDRESS,
+  PUBLIC_PHONE_NUMBER,
+  SITE_NAME,
+  SITE_URL,
+  VERIFIED_SOCIAL_PROFILE_URLS,
+} from '@/lib/siteMetadata';
 
-/**
- * ⚠ No `sameAs`. Every social handle in `contactContent.ts` is invented — the file says so in
- * capitals — and `sameAs` is a claim to own those accounts. Publishing them would be this site's
- * first unbacked assertion, in the one place a machine reads literally. Add the array when the real
- * accounts exist, in the same change that fixes the footer's links.
- */
 export function buildOrganizationSchema() {
   return {
     '@context': 'https://schema.org',
@@ -37,8 +37,12 @@ export function buildOrganizationSchema() {
     name: SITE_NAME,
     url: SITE_URL,
     description:
-      'Voidix builds custom websites, web applications, CRM platforms, mobile apps, SaaS products, AI tools, and workflow automation for businesses across the United States.',
-    logo: `${SITE_URL}/icon.svg`,
+      'Voidix is a custom software development company building digital products, web apps, CRMs, mobile apps, SaaS, AI, and workflow automation across the United States.',
+    logo: `${SITE_URL}/icon.png`,
+    email: PUBLIC_EMAIL_ADDRESS,
+    telephone: PUBLIC_PHONE_NUMBER,
+    // `sameAs` is an ownership claim, so only profiles confirmed by the studio belong here.
+    sameAs: VERIFIED_SOCIAL_PROFILE_URLS,
   };
 }
 
