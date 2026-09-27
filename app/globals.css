@@ -6198,6 +6198,15 @@ body {
   max-width: 18ch;
 }
 
+/* An article's title is one long editor-written sentence, not the routes' short two-beat claims — at the
+   display scale above it filled the first screen before the lead was ever seen. */
+.doc-masthead-title--article {
+  font-size: clamp(1.8rem, 4.2vw, 3.6rem);
+  line-height: 1.04;
+  max-width: 24ch;
+  text-wrap: balance;
+}
+
 /* ⚠ One span per SENTENCE, and `block` is what makes that mean anything — the title is authored as an
    array precisely so a 360px screen can wrap each sentence on its own terms instead of inheriting a
    `<br/>` somebody chose while looking at a desktop. `balance` then evens whatever lines it needs. */
@@ -6950,14 +6959,18 @@ body {
   color: rgb(var(--accent-rgb) / 0.85);
 }
 
+/* ⚠ An article title is a SENTENCE an editor writes, not a two-word display line — "What Is Custom
+   Software Development? A Complete Guide for Businesses" at 6.2vw inside 13ch set six lines of 85px type
+   and filled the whole first screen on a 1366 laptop. The measure is wider and the scale sits under the
+   masthead's, so the lead story reads as the first entry of the archive rather than a second page title. */
 .blog-feature-title {
   display: block;
-  max-width: 13ch;
+  max-width: 22ch;
   margin-top: clamp(1rem, 3vh, 2rem);
   font-weight: 800;
-  font-size: clamp(2rem, 6.2vw, 5.8rem);
-  line-height: 0.94;
-  letter-spacing: -0.05em;
+  font-size: clamp(1.6rem, 3.4vw, 3.4rem);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
   text-wrap: balance;
   color: var(--fg);
 }
@@ -8024,7 +8037,7 @@ body {
   }
 
   .blog-feature {
-    min-height: clamp(24rem, 110vw, 34rem);
+    min-height: clamp(22rem, 90vw, 30rem);
   }
 
   .blog-feature-orbit {
@@ -8074,12 +8087,12 @@ body {
   }
 
   .blog-feature {
-    min-height: 27rem;
+    min-height: 24rem;
     padding: 1.25rem;
   }
 
   .blog-feature-title {
-    font-size: clamp(2rem, 11vw, 3.25rem);
+    font-size: clamp(1.45rem, 7vw, 1.9rem);
   }
 
   .blog-entry-link {

@@ -18,6 +18,7 @@ export default function BlogArticlePage({ post, nextPost }: BlogArticlePageProps
       title={[post.title]}
       lead={post.excerpt}
       sections={ARTICLE_SECTIONS}
+      titleScale="article"
     >
       <DocSection meta={{ ...ARTICLE_SECTIONS[0], number: post.index }}>
         <div className="blog-article-meta">

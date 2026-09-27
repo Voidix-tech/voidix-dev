@@ -25,14 +25,22 @@ import type { CSSProperties } from 'react';
  * from the top of the document, and the one thing on screen that came from the hero goes with you.
  */
 
+export type MastheadTitleScale = 'display' | 'article';
+
 interface PageMastheadProps {
   eyebrow: string;
   /** One entry per sentence. See the header — never a string with a break in it. */
   title: readonly string[];
   lead: string;
+  titleScale?: MastheadTitleScale;
 }
 
-export default function PageMasthead({ eyebrow, title, lead }: PageMastheadProps) {
+export default function PageMasthead({ eyebrow, title, lead, titleScale = 'display' }: PageMastheadProps) {
+  const titleClassName =
+    titleScale === 'article'
+      ? 'font-display doc-masthead-title doc-masthead-title--article'
+      : 'font-display doc-masthead-title';
+
   return (
     <header className="doc-masthead" data-reveal>
       {/* Decorative and nothing but — the page says what it is in the title beneath it. */}
@@ -43,7 +51,7 @@ export default function PageMasthead({ eyebrow, title, lead }: PageMastheadProps
 
       <p className="eyebrow doc-masthead-eyebrow">{eyebrow}</p>
 
-      <h1 className="font-display doc-masthead-title">
+      <h1 className={titleClassName}>
         {title.map((sentence, index) => (
           <span
             key={sentence}

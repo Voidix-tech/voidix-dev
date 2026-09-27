@@ -2,7 +2,7 @@
 
 import { useRef, type ReactNode } from 'react';
 import type { DocSectionMeta } from './docSections';
-import PageMasthead from './PageMasthead';
+import PageMasthead, { type MastheadTitleScale } from './PageMasthead';
 import OrbitRail from './OrbitRail';
 import PageFooter from './PageFooter';
 import { useScrollReveal } from './hooks/useScrollReveal';
@@ -81,6 +81,8 @@ interface PageShellProps {
   lead: string;
   /** Feeds the rail's stations. The page renders the matching sections itself. */
   sections: readonly DocSectionMeta[];
+  /** `article` sets a long editor-written title at reading scale rather than display scale. */
+  titleScale?: MastheadTitleScale;
   children: ReactNode;
 }
 
@@ -89,6 +91,7 @@ export default function PageShell({
   title,
   lead,
   sections,
+  titleScale = 'display',
   children,
 }: PageShellProps) {
   const pageRef = useRef<HTMLElement>(null);
@@ -114,7 +117,7 @@ export default function PageShell({
           any screen wider than that while `/` ran edge to edge. The homepage has no such wrapper
           anywhere; see the block on `.doc-inner` in globals.css for what holds the copy instead. */}
       <div className="doc-inner">
-        <PageMasthead eyebrow={eyebrow} title={title} lead={lead} />
+        <PageMasthead eyebrow={eyebrow} title={title} lead={lead} titleScale={titleScale} />
 
         <div className="doc-body">
           <OrbitRail sections={sections} />
