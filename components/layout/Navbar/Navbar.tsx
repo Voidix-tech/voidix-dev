@@ -169,7 +169,11 @@ export default function Navbar() {
           the difference blend on .nav-root. The meters are positioned over each item by
           measurement (see useNavbarAnimation), and each fill reads the CSS var its
           section feeds. */}
-      <div ref={accentRef} className="nav-accent" aria-hidden="true">
+      <div
+        ref={accentRef}
+        className={`nav-accent ${!isHomepage ? "nav--doc" : ""}`.trim()}
+        aria-hidden="true"
+      >
         <div className="nav-accent-line" />
 
         <div className="nav-accent-logo">
@@ -230,7 +234,10 @@ export default function Navbar() {
 
       {/* Blended bar — mix-blend-mode: difference inverts all of this against whatever
           is underneath (cream hero → dark, black sections → light). */}
-      <header ref={navRef} className="nav-root">
+      <header
+        ref={navRef}
+        className={`nav-root ${!isHomepage ? "nav--doc" : ""}`.trim()}
+      >
         <a href="/" className="nav-logo" data-journey="Wordmark (navbar)">
           {/* Transparent placeholder where the accent mark sits in the accent layer. */}
           <span className="nav-mark-spacer" aria-hidden="true" />

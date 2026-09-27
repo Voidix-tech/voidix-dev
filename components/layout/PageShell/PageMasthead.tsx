@@ -36,10 +36,15 @@ interface PageMastheadProps {
 }
 
 export default function PageMasthead({ eyebrow, title, lead, titleScale = 'display' }: PageMastheadProps) {
+  const isArticle = titleScale === 'article';
   const titleClassName =
-    titleScale === 'article'
+    isArticle
       ? 'font-display doc-masthead-title doc-masthead-title--article'
       : 'font-display doc-masthead-title';
+  const leadClassName =
+    isArticle
+      ? 'doc-masthead-lead doc-masthead-lead--article'
+      : 'doc-masthead-lead';
 
   return (
     <header className="doc-masthead" data-reveal>
@@ -65,7 +70,7 @@ export default function PageMasthead({ eyebrow, title, lead, titleScale = 'displ
 
       <span className="doc-masthead-rule" aria-hidden="true" />
 
-      <p className="doc-masthead-lead">{lead}</p>
+      <p className={leadClassName}>{lead}</p>
     </header>
   );
 }

@@ -324,6 +324,20 @@ body {
   pointer-events: none; /* never intercept clicks meant for the real nav */
 }
 
+/* Document route navbar styling: solid background so it is not see-through */
+.nav-accent.nav--doc {
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+
+/* On desktop (not sm screens), navbar scrolls away with the document ("goes up when you scroll down") */
+@media (min-width: 51.26em) {
+  .nav-root.nav--doc,
+  .nav-accent.nav--doc {
+    position: absolute;
+  }
+}
+
 .nav-accent-logo {
   display: flex;
   align-items: center;
@@ -6203,7 +6217,8 @@ body {
 .doc-masthead-title--article {
   font-size: clamp(1.8rem, 4.2vw, 3.6rem);
   line-height: 1.04;
-  max-width: 24ch;
+  width: 100%;
+  max-width: 100%;
   text-wrap: balance;
 }
 
@@ -6233,6 +6248,11 @@ body {
   font-size: var(--doc-fs-body);
   line-height: 1.75;
   color: var(--doc-ink);
+}
+
+.doc-masthead-lead--article {
+  max-width: 100%;
+  margin-left: 0;
 }
 
 /* ── The body: rail gutter + the flow ── */
@@ -6965,22 +6985,28 @@ body {
    masthead's, so the lead story reads as the first entry of the archive rather than a second page title. */
 .blog-feature-title {
   display: block;
-  max-width: 22ch;
+  width: 100%;
+  max-width: 100%;
   margin-top: clamp(1rem, 3vh, 2rem);
   font-weight: 800;
-  font-size: clamp(1.6rem, 3.4vw, 3.4rem);
-  line-height: 1.04;
+  font-size: clamp(1.2rem, 3.2vw, 3.2rem);
+  line-height: 1.08;
   letter-spacing: -0.035em;
   text-wrap: balance;
+  overflow-wrap: break-word;
+  word-break: break-word;
   color: var(--fg);
 }
 
 .blog-feature-excerpt {
   display: block;
-  max-width: 48ch;
+  width: 100%;
+  max-width: 100%;
   margin-top: clamp(1.2rem, 3vh, 2rem);
   font-size: var(--doc-fs-body);
   line-height: 1.75;
+  overflow-wrap: break-word;
+  word-break: break-word;
   color: var(--doc-ink);
 }
 
@@ -7061,22 +7087,28 @@ body {
 
 .blog-entry-title {
   display: block;
-  max-width: 24ch;
+  width: 100%;
+  max-width: 100%;
   margin-top: 0.65rem;
   font-weight: 700;
-  font-size: clamp(1.35rem, 3.5vw, 3rem);
-  line-height: 1.04;
+  font-size: clamp(1.1rem, 3vw, 2.75rem);
+  line-height: 1.08;
   letter-spacing: -0.035em;
   text-wrap: balance;
+  overflow-wrap: break-word;
+  word-break: break-word;
   color: var(--fg);
 }
 
 .blog-entry-excerpt {
   display: block;
-  max-width: 58ch;
+  width: 100%;
+  max-width: 100%;
   margin-top: 0.8rem;
   font-size: var(--doc-fs-body);
   line-height: 1.7;
+  overflow-wrap: break-word;
+  word-break: break-word;
   color: var(--doc-ink);
 }
 
@@ -7100,7 +7132,8 @@ body {
 }
 
 .blog-empty-title {
-  max-width: 18ch;
+  width: 100%;
+  max-width: 100%;
   font-weight: 700;
   font-size: clamp(1.5rem, 4vw, 3.2rem);
   line-height: 1.05;
@@ -7110,7 +7143,8 @@ body {
 }
 
 .blog-empty-copy {
-  max-width: 46ch;
+  width: 100%;
+  max-width: 100%;
   margin-top: 1rem;
   font-size: var(--doc-fs-body);
   line-height: 1.7;
@@ -7119,6 +7153,15 @@ body {
 
 .blog-article-meta {
   margin-bottom: clamp(1.5rem, 4vh, 2.5rem);
+}
+
+.blog-article-body {
+  width: 100%;
+  max-width: 100%;
+}
+
+.blog-article-body .doc-paragraph {
+  max-width: 100%;
 }
 
 .blog-article-body .doc-paragraph:first-of-type::first-letter {
@@ -7132,7 +7175,8 @@ body {
 }
 
 .blog-article-heading {
-  max-width: 22ch;
+  width: 100%;
+  max-width: 100%;
   margin-top: clamp(2.5rem, 7vh, 5.5rem);
   font-weight: 800;
   font-size: clamp(1.75rem, 4vw, 3.6rem);
@@ -7143,7 +7187,8 @@ body {
 }
 
 .blog-article-subheading {
-  max-width: 34ch;
+  width: 100%;
+  max-width: 100%;
   margin-top: clamp(1.8rem, 5vh, 3.4rem);
   font-weight: 700;
   font-size: clamp(1.15rem, 2.2vw, 1.7rem);
@@ -7160,7 +7205,8 @@ body {
 .blog-article-list {
   display: grid;
   gap: 0.65rem;
-  max-width: 62ch;
+  width: 100%;
+  max-width: 100%;
   margin-top: 1.25rem;
   padding: 0;
   list-style: none;
@@ -7199,7 +7245,8 @@ body {
   flex-direction: column;
   align-items: flex-end;
   gap: 0.45rem;
-  max-width: 24ch;
+  width: 100%;
+  max-width: 100%;
   color: inherit;
   text-align: right;
   text-decoration: none;
@@ -8044,6 +8091,16 @@ body {
     width: min(115vw, 34rem);
     right: -55%;
   }
+
+  .blog-feature-title {
+    font-size: clamp(1.15rem, 5vw, 1.85rem);
+    max-width: 100%;
+  }
+
+  .blog-entry-title {
+    font-size: clamp(1.05rem, 4.5vw, 1.55rem);
+    max-width: 100%;
+  }
 }
 
 /* ── The true phone ──
@@ -8092,7 +8149,8 @@ body {
   }
 
   .blog-feature-title {
-    font-size: clamp(1.45rem, 7vw, 1.9rem);
+    font-size: clamp(1rem, 5.5vw, 1.45rem);
+    max-width: 100%;
   }
 
   .blog-entry-link {
@@ -8105,7 +8163,8 @@ body {
   }
 
   .blog-entry-title {
-    font-size: 1.35rem;
+    font-size: clamp(0.95rem, 4.5vw, 1.25rem);
+    max-width: 100%;
   }
 
   .blog-article-navigation {
