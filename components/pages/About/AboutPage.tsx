@@ -7,7 +7,13 @@ import ClaimRow from '@/components/layout/PageShell/ClaimRow';
 import PhaseTrack from '@/components/layout/PageShell/PhaseTrack';
 import EnquiryButton from '@/components/ui/EnquiryButton/EnquiryButton';
 import EnquiryPanel from '@/components/ui/EnquiryPanel/EnquiryPanel';
-import { ABOUT_SECTIONS, type AboutContent } from './aboutContent';
+import AboutTopProjects from './AboutTopProjects';
+import {
+  ABOUT_SECTIONS,
+  TOP_PROJECTS_SECTION_META,
+  getAboutSections,
+  type AboutContent,
+} from './aboutContent';
 
 /**
  * `/about` — the studio, told in the site's own language.
@@ -38,6 +44,8 @@ interface AboutPageProps {
 
 export default function AboutPage({ content }: AboutPageProps) {
   const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
+  const hasTopProjects = Boolean(content.topProjects && content.topProjects.length > 0);
+  const sections = getAboutSections(hasTopProjects);
 
   return (
     <>
@@ -45,7 +53,7 @@ export default function AboutPage({ content }: AboutPageProps) {
         eyebrow={content.eyebrow}
         title={content.title}
         lead={content.lead}
-        sections={ABOUT_SECTIONS}
+        sections={sections}
       >
         {/* 01 — the premise */}
         <DocSection meta={ABOUT_SECTIONS[0]}>
@@ -114,6 +122,14 @@ export default function AboutPage({ content }: AboutPageProps) {
           </ul>
           <p className="doc-note">{content.stackNote}</p>
         </DocSection>
+
+        {/* 06 — top performing projects */}
+        {hasTopProjects && (
+          <AboutTopProjects
+            projects={content.topProjects}
+            meta={TOP_PROJECTS_SECTION_META}
+          />
+        )}
 
         {/* The close. Not a numbered section — it is the page ending rather than another thing the page
             has to say, so it carries no station on the rail. */}

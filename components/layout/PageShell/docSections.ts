@@ -14,4 +14,6 @@ export interface DocSectionMeta {
   number: string;
   /** The heading itself. */
   title: string;
+  /** Optional short label for navigation or rail if distinct from title. */
+  label?: string;
 }

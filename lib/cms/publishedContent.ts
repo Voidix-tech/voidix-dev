@@ -37,10 +37,23 @@ export interface PublishedInstrument {
   value: string;
 }
 
+export interface PublishedTopProject {
+  /** Derived ordinal ("01", "02", etc.) */
+  index: string;
+  /** Project name (max 80 chars) */
+  name: string;
+  /** Studio description for the About page (max 400 chars) */
+  description: string;
+  /** Live URL if public, or null for internal/NDA projects */
+  url: string | null;
+}
+
 export interface PublishedAbout {
   eyebrow: string;
-  /** One entry per sentence, never one string with a break in it — see PageMasthead's header. */
-  title: string[];
+  /** Optional split titles or sentence list — see PageMasthead's header. */
+  titleLine1?: string;
+  titleLine2?: string;
+  title?: string[];
   lead: string;
   premiseParagraphs: string[];
   premiseQuote: string;
@@ -50,6 +63,8 @@ export interface PublishedAbout {
   instrumentsNote: string;
   stack: string[];
   stackNote: string;
+  /** Section 06. An empty list is a valid designed state. */
+  topProjects: PublishedTopProject[];
   closingTitle: string;
   closingLead: string;
   careersInvite: string;

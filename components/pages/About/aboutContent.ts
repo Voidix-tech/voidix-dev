@@ -35,7 +35,7 @@
 import type { DocSectionMeta } from '@/components/layout/PageShell/docSections';
 import type { Claim } from '@/components/layout/PageShell/ClaimRow';
 import type { Phase } from '@/components/layout/PageShell/PhaseTrack';
-import type { PublishedAbout } from '@/lib/cms/publishedContent';
+import type { PublishedAbout, PublishedTopProject } from '@/lib/cms/publishedContent';
 
 export interface Instrument {
   label: string;
@@ -66,11 +66,59 @@ export interface AboutContent {
   instrumentsNote: string;
   stack: readonly string[];
   stackNote: string;
+  /** Section 06. An empty list is a valid designed state. */
+  topProjects: readonly PublishedTopProject[];
   closingTitle: string;
   closingLead: string;
   /** The cross-link to the other document page. Both pages carry one to the other. */
   careersInvite: string;
 }
+
+export const DEFAULT_TOP_PROJECTS: PublishedTopProject[] = [
+  {
+    index: "01",
+    name: "Kemcon",
+    description:
+      "A full eco-system for Kemcon company that helps destibute leads through out the website and a full crm for managing the day to day actions also an a automated email to whatsapp integeration in the factory.",
+    url: "https://www.kemcon.site/",
+  },
+  {
+    index: "02",
+    name: "Dar El-Kola",
+    description:
+      "A full managment system for the patients, sessions, medications and invistigations for each indipendent appointment.",
+    url: null,
+  },
+  {
+    index: "03",
+    name: "Einherji",
+    description:
+      "Clients to sell to, suppliers to buy from, roles to apply for — three hunts, one pipeline. Twenty-three sources feed a single queue, and every contact arrives with a message drafted in that hunt's own voice.",
+    url: null,
+  },
+  {
+    index: "04",
+    name: "Valkyrie",
+    description:
+      "A shop floor with the stock room built in. Stock, pricing, coupons, reviews and the homepage itself are edited in the same console that carries an order from checkout to delivery — paid by card through Stripe, or cash at the door.",
+    url: "https://www.valkyrie-eg.com/",
+  },
+];
+
+export const TOP_PROJECTS_SECTION_META: DocSectionMeta = {
+  key: "top-projects",
+  label: "Top projects",
+  number: "06",
+  title: "Top performing projects",
+};
+
+export const ABOUT_BASE_SECTIONS: readonly DocSectionMeta[] = [
+  { key: 'premise', number: '01', title: 'The premise' },
+  { key: 'made-of', number: '02', title: 'What we are made of' },
+  { key: 'how-a-build-runs', number: '03', title: 'How a build runs' },
+  { key: 'instruments', number: '04', title: 'The instruments' },
+  { key: 'what-we-work-in', number: '05', title: 'What we work in' },
+];
 
 /**
  * The numbered sections, in order.
@@ -80,12 +128,19 @@ export interface AboutContent {
  * nowhere; rendering one that is not here leaves it invisible to the rail. One list, both jobs.
  */
 export const ABOUT_SECTIONS: readonly DocSectionMeta[] = [
-  { key: 'premise', number: '01', title: 'The premise' },
-  { key: 'made-of', number: '02', title: 'What we are made of' },
-  { key: 'how-a-build-runs', number: '03', title: 'How a build runs' },
-  { key: 'instruments', number: '04', title: 'The instruments' },
-  { key: 'what-we-work-in', number: '05', title: 'What we work in' },
+  ...ABOUT_BASE_SECTIONS,
+  TOP_PROJECTS_SECTION_META,
 ];
+
+/**
+ * Dynamic Section List Invariant:
+ * Section 06's #top-projects anchor and its orbit rail station must only exist when topProjects.length > 0.
+ * If topProjects is empty or undefined, the site drops the section completely from the DOM and drops its
+ * station from the orbit rail so visitors cannot scroll to a blank section.
+ */
+export function getAboutSections(hasTopProjects: boolean): readonly DocSectionMeta[] {
+  return hasTopProjects ? ABOUT_SECTIONS : ABOUT_BASE_SECTIONS;
+}
 
 export const ABOUT_FALLBACK: AboutContent = {
   eyebrow: 'About',
@@ -204,6 +259,8 @@ export const ABOUT_FALLBACK: AboutContent = {
   stackNote:
     'You don’t have to build everything at once. A project can start with a website, evolve into a customer portal, connect to a CRM, become a mobile application, add automation, and introduce AI. We build the foundation so your technology can evolve with your business.',
 
+  topProjects: DEFAULT_TOP_PROJECTS,
+
   closingTitle: "Tell us what you're building.",
 
   closingLead:
@@ -226,20 +283,28 @@ export function resolveAboutContent(published: PublishedAbout | null): AboutCont
     return ABOUT_FALLBACK;
   }
 
+  const title =
+    Array.isArray(published.title) && published.title.length > 0
+      ? published.title
+      : published.titleLine1 || published.titleLine2
+        ? ([published.titleLine1, published.titleLine2].filter(Boolean) as string[])
+        : ABOUT_FALLBACK.title;
+
   return {
-    eyebrow: published.eyebrow,
-    title: published.title,
-    lead: published.lead,
-    premiseParagraphs: published.premiseParagraphs,
-    premiseQuote: published.premiseQuote,
-    principles: published.principles,
-    buildPhases: published.buildPhases,
-    instruments: published.instruments,
-    instrumentsNote: published.instrumentsNote,
-    stack: published.stack,
-    stackNote: published.stackNote,
-    closingTitle: published.closingTitle,
-    closingLead: published.closingLead,
-    careersInvite: published.careersInvite,
+    eyebrow: published.eyebrow ?? ABOUT_FALLBACK.eyebrow,
+    title,
+    lead: published.lead ?? ABOUT_FALLBACK.lead,
+    premiseParagraphs: published.premiseParagraphs ?? ABOUT_FALLBACK.premiseParagraphs,
+    premiseQuote: published.premiseQuote ?? ABOUT_FALLBACK.premiseQuote,
+    principles: published.principles ?? ABOUT_FALLBACK.principles,
+    buildPhases: published.buildPhases ?? ABOUT_FALLBACK.buildPhases,
+    instruments: published.instruments ?? ABOUT_FALLBACK.instruments,
+    instrumentsNote: published.instrumentsNote ?? ABOUT_FALLBACK.instrumentsNote,
+    stack: published.stack ?? ABOUT_FALLBACK.stack,
+    stackNote: published.stackNote ?? ABOUT_FALLBACK.stackNote,
+    topProjects: published.topProjects ?? [],
+    closingTitle: published.closingTitle ?? ABOUT_FALLBACK.closingTitle,
+    closingLead: published.closingLead ?? ABOUT_FALLBACK.closingLead,
+    careersInvite: published.careersInvite ?? ABOUT_FALLBACK.careersInvite,
   };
 }
